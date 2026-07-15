@@ -29,7 +29,7 @@ export async function runCLI() {
   const program = new Command();
 
   program
-    .name('prsmith')
+    .name('gitink')
     .description('Auto-generate GitHub PR titles and descriptions using Gemini AI')
     .version('1.0.0')
     .option('-k, --key <key>', 'Gemini API Key')
@@ -116,7 +116,7 @@ export async function runCLI() {
 const isMain = process.argv[1] && (
   process.argv[1].endsWith('index.js') || 
   process.argv[1].endsWith('index.ts') ||
-  process.argv[1].endsWith('prsmith')
+  process.argv[1].endsWith('gitink')
 );
 
 if (isMain) {

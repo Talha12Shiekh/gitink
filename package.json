@@ -1,10 +1,10 @@
 {
-  "name": "prsmith",
+  "name": "gitink",
   "version": "1.0.0",
   "description": "Auto-generate GitHub PR titles and descriptions using Gemini AI",
   "main": "dist/index.js",
   "bin": {
-    "prsmith": "dist/index.js"
+    "gitink": "dist/index.js"
   },
   "scripts": {
     "build": "tsc && ncc build dist/action.js -o dist/action-bundle",
