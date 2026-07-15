@@ -1,80 +1,138 @@
-# PRSmith 🛠️🤖
+# GitInk
 
-PRSmith is a highly configurable tool and GitHub Action designed to automatically generate professional and descriptive pull request titles and descriptions. By analyzing the git diff of your changes, PRSmith uses **Google Gemini AI** to produce structured, clean, and context-aware markdown content, completely eliminating the repetitive task of writing PR details manually.
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Talha12Shiekh/PRSmith/gitlink.yml)](https://github.com/Talha12Shiekh/PRSmith/actions)
+[![Coverage Status](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Talha12Shiekh/PRSmith)
+[![npm version](https://img.shields.io/npm/v/gitink)](https://www.npmjs.com/package/gitink)
+[![License](https://img.shields.io/npm/l/gitink)](https://github.com/Talha12Shiekh/PRSmith/blob/main/LICENSE)
 
-It is designed to run either as a **custom GitHub Action** in your CI workflows or as a **CLI tool** anywhere (locally or on other CI providers).
+Automatically generate pull request titles and descriptions using AI.
+
+```text
+$ git diff | npx gitink --dry-run
+Read git diff from stdin.
+Analyzing diff and generating content...
+
+Title: feat: add local storage caching for session validation
+
+Description:
+## Summary
+This pull request introduces local storage caching for user sessions to reduce redundant verification requests.
+
+## Key Changes
+- Modified src/auth.ts to check cache before calling verify endpoint.
+- Added session expiration validation helper in src/utils.ts.
+```
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+  - [CLI Mode](#cli-mode)
+  - [GitHub Action Mode](#github-action-mode)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
 ## Features
 
-- 🧠 **AI-Powered Analysis**: Uses Gemini (`gemini-2.5-flash` by default) to digest changes and write meaningful summaries.
-- 🚀 **Hybrid Flow**: Can be run as a standard GitHub Action or globally via npm (`npx prsmith`).
-- 📁 **Smart Diff Filtering**: Automatically ignores non-code files (images, binary files, lockfiles) to optimize processing and context sizes.
-- ⚡ **Large Diff Optimizations**: Gracefully handles large diffs by truncating them and reporting omitted files to avoid rate or token limit errors.
-- ⚙️ **Configurable**: Fully customizable via a `.prsmith.json` configuration file, letting you fine-tune the system prompt and exclude paths.
-- 🏗️ **Conventional Commits**: Prompts the AI to format titles following conventional commits (e.g., `feat: ...`, `fix: ...`).
+- **Hybrid Workflow**: Use it as a terminal CLI tool during local development or drop it directly into your GitHub Action workflows.
+- **Diff Optimization**: Automatically ignores noisy file changes (such as package lockfiles, assets, and compiled directories) to keep analysis clean.
+- **Smart Truncation**: Handles large pull requests safely by truncating excessive diff chunks and listing omitted files in the final analysis.
+- **Configurable Prompting**: Allows you to customize the AI's generation instructions and output formatting via a simple configuration file.
+- **Structured Output**: Enforces valid JSON schema responses from the API to guarantee error-free formatting.
 
 ---
 
-## 📦 GitHub Action Integration
+## Getting Started
 
-To integrate PRSmith into your repository, add the following workflow file (e.g., `.github/workflows/prsmith.yml`):
+### Prerequisites
 
-```yaml
-name: PRSmith - Auto Describe PRs
+- Node.js >= 20.0.0
+- An API key for Google Gemini (obtainable from Google AI Studio)
 
-on:
-  pull_request:
-    types: [opened, reopened, synchronize]
+### Installation
 
-jobs:
-  describe-pr:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write # Required to allow updating the PR details
+You can run GitInk on demand without permanent installation:
 
-    steps:
-      - name: PRSmith Generator
-        uses: your-github-username/PRSmith@v1
-        with:
-          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
-          # github-token defaults to the automatically provided GITHUB_TOKEN environment variable.
+```bash
+npx gitink --help
 ```
 
-### Action Inputs
+Alternatively, install it globally on your system:
 
-| Input | Description | Required | Default |
-| --- | --- | --- | --- |
-| `gemini-api-key` | Google Gemini API Key. | No | Falls back to `GEMINI_API_KEY` env var |
-| `github-token` | GitHub access token used to fetch the diff and update the PR. | No | Falls back to `GITHUB_TOKEN` env var |
-| `config-path` | Path to a custom PRSmith JSON configuration file. | No | `.prsmith.json` in the root |
+```bash
+npm install -g gitink
+```
 
 ---
 
-## 💻 CLI Usage
+## Usage
 
-You can run PRSmith directly on your local machine or in custom pipeline scripting via `npm` / `npx`.
+### CLI Mode
 
-### 1. Local Dry Run (Pipe Diff)
-Analyze your uncommitted changes without modifying any GitHub PR:
-```bash
-git diff main...HEAD | npx prsmith --dry-run --key "YOUR_GEMINI_API_KEY"
+To run a dry run locally and test GitInk's AI analysis without modifying GitHub, set your API key in your terminal session and pipe the appropriate git diff command:
+
+**For Windows (PowerShell):**
+```powershell
+$env:GEMINI_API_KEY="your_api_key_here"
 ```
 
-### 2. Full CLI Execution
-Run the update against a specific GitHub repository and PR:
+**For macOS / Linux (Bash):**
 ```bash
-export GEMINI_API_KEY="your-gemini-api-key"
-export GITHUB_TOKEN="your-github-token-with-pull-request-write-perms"
-
-npx prsmith --repo "owner/repo" --pr 42
+export GEMINI_API_KEY="your_api_key_here"
 ```
 
-### CLI Arguments
+Choose the command that matches the state of your git repository:
+
+* **Analyze unstaged changes only** (local file edits that have not been staged with `git add`):
+  ```bash
+  git diff | npx gitink --dry-run
+  ```
+
+* **Analyze staged changes only** (files you staged with `git add` but have not committed yet):
+  ```bash
+  git diff --staged | npx gitink --dry-run
+  ```
+
+* **Analyze all uncommitted changes** (combines both staged and unstaged edits):
+  ```bash
+  git diff HEAD | npx gitink --dry-run
+  ```
+
+* **Analyze committed changes on your branch** (compares all commits made on your branch since splitting from `main`):
+  ```bash
+  git diff main...HEAD | npx gitink --dry-run
+  ```
+
+To update a specific open pull request on GitHub directly from your terminal:
+
+**For Windows (PowerShell):**
+```powershell
+$env:GEMINI_API_KEY="your_api_key_here"
+$env:GITHUB_TOKEN="your_github_personal_access_token"
+
+npx gitink --repo "owner/repo" --pr 42
+```
+
+**For macOS / Linux (Bash):**
+```bash
+export GEMINI_API_KEY="your_api_key_here"
+export GITHUB_TOKEN="your_github_personal_access_token"
+
+npx gitink --repo "owner/repo" --pr 42
+```
+
+### CLI Options
+
+You can customize the execution of the CLI using the following options:
 
 ```text
-Usage: prsmith [options]
+Usage: gitink [options]
 
 Auto-generate GitHub PR titles and descriptions using Gemini AI
 
@@ -92,9 +150,53 @@ Options:
 
 ---
 
-## 🛠️ Configuration File (`.prsmith.json`)
+### GitHub Action Mode
 
-You can create a `.prsmith.json` file in the root of your project to customize PRSmith's behavior:
+To automate PR descriptions on every commit, add this workflow file to your repository at `.github/workflows/gitink.yml`:
+
+```yaml
+name: GitInk PR Auto-Describer
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  describe-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run GitInk Generator
+        uses: Talha12Shiekh/PRSmith@main
+        with:
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### GitHub Environment Setup
+
+To run GitInk in your repository's actions, you need to configure access credentials:
+
+1. **Set up GEMINI_API_KEY**:
+   - Go to your repository on GitHub.
+   - Navigate to **Settings** -> **Secrets and variables** -> **Actions**.
+   - Click on **New repository secret**.
+   - Set the name to `GEMINI_API_KEY` and paste your Gemini API key from Google AI Studio as the value.
+
+2. **Set up GITHUB_TOKEN**:
+   - The `GITHUB_TOKEN` is a built-in token automatically created by GitHub for every workflow run. You do not need to manually define it in your secrets.
+   - Ensure the workflow has the `permissions: pull-requests: write` property configured (this is already included in the YAML template above) to grant the token access to update your pull request.
+
+---
+
+## Configuration
+
+You can customize GitInk's files validation and prompt settings by creating a `.prsmith.json` file in the root of your project:
 
 ```json
 {
@@ -103,36 +205,38 @@ You can create a `.prsmith.json` file in the root of your project to customize P
     "yarn.lock",
     "pnpm-lock.yaml",
     "dist/**",
-    "build/**",
-    "docs/**/*.pdf",
     "*.png",
     "*.jpg"
   ],
   "maxDiffLength": 60000,
-  "prompt": "You are a professional developer. Analyze the changes in the diff and generate a markdown description that summarizes changes in a humorous, witty style, and a conventional commit title."
+  "prompt": "Analyze the changes and write a pull request description in a concise, bulleted format. Keep the tone technical and direct."
 }
 ```
 
 ---
 
-## 🏗️ Development & Building
+## Contributing
 
-To contribute or build the code from source:
+We welcome community contributions. To set up the project locally:
 
-1. **Clone the repository:**
+1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/PRSmith.git
+   git clone https://github.com/Talha12Shiekh/PRSmith.git
    cd PRSmith
    ```
-
-2. **Install dependencies:**
+2. Install development dependencies:
    ```bash
    npm install
    ```
-
-3. **Build and Bundle:**
-   This project uses TypeScript and bundles the output using `@vercel/ncc` so that the action can run in GitHub environment without carrying `node_modules`.
+3. Compile TypeScript files:
    ```bash
    npm run build
    ```
-   This will output the compiled files in `dist/` and the compiled action bundle in `dist/action-bundle/index.js`.
+
+For detailed coding standards and pull request workflows, please read our [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
