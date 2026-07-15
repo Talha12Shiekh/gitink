@@ -1,0 +1,15 @@
+# Ignore source TypeScript files
+src/
+tsconfig.json
+
+# Ignore local configs and logs
+.env
+.env.*
+*.log
+.DS_Store
+
+# Ignore GitHub Action bundle (not needed for npm CLI, reduces package size significantly)
+dist/action-bundle/
+
+# Ignore GitHub Action definition
+action.yml
