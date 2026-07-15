@@ -1,0 +1,19 @@
+name: 'PRSmith'
+description: 'Automatically analyze pull request diffs and write descriptive titles and descriptions using Gemini AI'
+author: 'Antigravity'
+branding:
+  icon: 'edit'
+  color: 'blue'
+inputs:
+  gemini-api-key:
+    description: 'The API key for Google Gemini. If not provided, the GEMINI_API_KEY environment variable will be used.'
+    required: false
+  github-token:
+    description: 'The GitHub Token to access pull request details and update it. Defaults to GITHUB_TOKEN environment variable.'
+    required: false
+  config-path:
+    description: 'Path to the PRSmith configuration JSON file (e.g. .prsmith.json).'
+    required: false
+runs:
+  using: 'node20'
+  main: 'dist/action-bundle/index.js'

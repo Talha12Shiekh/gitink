@@ -1,0 +1,36 @@
+{
+  "name": "prsmith",
+  "version": "1.0.0",
+  "description": "Auto-generate GitHub PR titles and descriptions using Gemini AI",
+  "main": "dist/index.js",
+  "bin": {
+    "prsmith": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc && ncc build dist/action.js -o dist/action-bundle",
+    "start": "ts-node src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "github-action",
+    "pull-request",
+    "gemini",
+    "ai",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
+    "@google/genai": "^2.11.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "@vercel/ncc": "^0.38.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
+  }
+}

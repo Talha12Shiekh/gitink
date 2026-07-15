@@ -1,0 +1,23 @@
+# Dependency directory
+node_modules/
+
+# Compiled output
+# We ignore standard compilation files in dist/ but must include the packaged action bundle
+dist/*
+!dist/action-bundle/
+
+# Environment configuration
+.env
+.env.local
+.env.*.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
