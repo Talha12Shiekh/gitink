@@ -75,43 +75,81 @@ npm install -g gitink
 
 ### CLI Mode
 
-To run a dry run locally and test GitInk's AI analysis without modifying GitHub, set your API key in your terminal session and pipe the appropriate git diff command:
+To test or run GitInk's AI analysis locally, you can execute it in CLI mode using one of the following methods:
 
-**For Windows (PowerShell):**
+#### Method 1: Zero-Setup Quick Run (No installation required)
+
+You can run GitInk instantly on demand without installing it or setting environment variables by passing your credentials directly via the `--key` (`-k`) and `--token` (`-t`) flags.
+
+##### Dry-Run Unstaged Changes
+Analyze local file modifications that have not been staged yet:
+```bash
+git diff | npx gitink --dry-run --key "your_gemini_api_key"
+```
+
+##### Dry-Run Staged Changes
+Analyze changes that have been added to the staging area with `git add`:
+```bash
+git diff --staged | npx gitink --dry-run --key "your_gemini_api_key"
+```
+
+##### Dry-Run All Uncommitted Changes
+Analyze both staged and unstaged local changes:
+```bash
+git diff HEAD | npx gitink --dry-run --key "your_gemini_api_key"
+```
+
+##### Dry-Run Committed Changes
+Analyze commits made on your current branch since it split from `main`:
+```bash
+git diff main...HEAD | npx gitink --dry-run --key "your_gemini_api_key"
+```
+
+##### Update Active GitHub Pull Request
+Directly submit the generated title and description to an open pull request on GitHub:
+```bash
+npx gitink --repo "owner/repo" --pr 42 --key "your_gemini_api_key" --token "your_github_personal_access_token"
+```
+
+#### Method 2: Session Environment Variables
+
+Alternatively, to avoid typing credentials for every command, set them in your terminal session first.
+
+##### Windows (PowerShell)
 ```powershell
 $env:GEMINI_API_KEY="your_api_key_here"
 ```
 
-**For macOS / Linux (Bash):**
+##### macOS / Linux (Bash)
 ```bash
 export GEMINI_API_KEY="your_api_key_here"
 ```
 
-Choose the command that matches the state of your git repository:
+Once the environment variable is configured, run the matching command for your repository state:
 
-* **Analyze unstaged changes only** (local file edits that have not been staged with `git add`):
-  ```bash
-  git diff | npx gitink --dry-run
-  ```
+##### Dry-Run Unstaged Changes
+```bash
+git diff | npx gitink --dry-run
+```
 
-* **Analyze staged changes only** (files you staged with `git add` but have not committed yet):
-  ```bash
-  git diff --staged | npx gitink --dry-run
-  ```
+##### Dry-Run Staged Changes
+```bash
+git diff --staged | npx gitink --dry-run
+```
 
-* **Analyze all uncommitted changes** (combines both staged and unstaged edits):
-  ```bash
-  git diff HEAD | npx gitink --dry-run
-  ```
+##### Dry-Run All Uncommitted Changes
+```bash
+git diff HEAD | npx gitink --dry-run
+```
 
-* **Analyze committed changes on your branch** (compares all commits made on your branch since splitting from `main`):
-  ```bash
-  git diff main...HEAD | npx gitink --dry-run
-  ```
+##### Dry-Run Committed Changes
+```bash
+git diff main...HEAD | npx gitink --dry-run
+```
 
-To update a specific open pull request on GitHub directly from your terminal:
+##### Update Active GitHub Pull Request (Requires GITHUB_TOKEN)
 
-**For Windows (PowerShell):**
+**Windows (PowerShell):**
 ```powershell
 $env:GEMINI_API_KEY="your_api_key_here"
 $env:GITHUB_TOKEN="your_github_personal_access_token"
@@ -119,7 +157,7 @@ $env:GITHUB_TOKEN="your_github_personal_access_token"
 npx gitink --repo "owner/repo" --pr 42
 ```
 
-**For macOS / Linux (Bash):**
+**macOS / Linux (Bash):**
 ```bash
 export GEMINI_API_KEY="your_api_key_here"
 export GITHUB_TOKEN="your_github_personal_access_token"
