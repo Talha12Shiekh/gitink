@@ -1,27 +1,11 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Talha12Shiekh/gitink/main/assets/gitink-logo.png" alt="GitInk Logo" width="120" height="120" />
-</p>
+# <img src="https://raw.githubusercontent.com/Talha12Shiekh/gitink/main/assets/gitink-logo.png" alt="GitInk Logo" width="38" height="38" align="center" /> GitInk
 
-<h1 align="center">GitInk</h1>
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Talha12Shiekh/gitink/gitlink.yml)](https://github.com/Talha12Shiekh/gitink/actions)
+[![Coverage Status](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Talha12Shiekh/gitink)
+[![npm version](https://img.shields.io/npm/v/gitink)](https://www.npmjs.com/package/gitink)
+[![License](https://img.shields.io/npm/l/gitink)](https://github.com/Talha12Shiekh/gitink/blob/main/LICENSE)
 
-<p align="center">
-  <a href="https://github.com/Talha12Shiekh/gitink/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/Talha12Shiekh/gitink/gitlink.yml" alt="Build Status" />
-  </a>
-  <a href="https://github.com/Talha12Shiekh/gitink">
-    <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" alt="Coverage Status" />
-  </a>
-  <a href="https://www.npmjs.com/package/gitink">
-    <img src="https://img.shields.io/npm/v/gitink" alt="npm version" />
-  </a>
-  <a href="https://github.com/Talha12Shiekh/gitink/blob/main/LICENSE">
-    <img src="https://img.shields.io/npm/l/gitink" alt="License" />
-  </a>
-</p>
-
-<p align="center">
-  Automatically generate pull request titles and descriptions using AI.
-</p>
+Automatically generate pull request titles and descriptions using AI.
 
 ![Terminal - gitink](https://raw.githubusercontent.com/Talha12Shiekh/gitink/main/assets/terminal-mockup.svg)
 
