@@ -7,36 +7,7 @@
 
 Automatically generate pull request titles and descriptions using AI.
 
-<div style="background-color: #1e1e1e; color: #d4d4d4; font-family: 'Courier New', Courier, monospace; padding: 15px; border-radius: 6px; border: 1px solid #3c3c3c; line-height: 1.5; font-size: 14px; margin-bottom: 20px;">
-  <!-- Window title bar -->
-  <div style="display: flex; gap: 6px; margin-bottom: 12px; border-bottom: 1px solid #3c3c3c; padding-bottom: 8px;">
-    <span style="width: 12px; height: 12px; background-color: #ff5f56; border-radius: 50%; display: inline-block;"></span>
-    <span style="width: 12px; height: 12px; background-color: #ffbd2e; border-radius: 50%; display: inline-block;"></span>
-    <span style="width: 12px; height: 12px; background-color: #27c93f; border-radius: 50%; display: inline-block;"></span>
-    <span style="margin-left: 10px; color: #8e8e8e; font-size: 12px; font-family: sans-serif;">Terminal - gitink</span>
-  </div>
-  <!-- Command line -->
-  <div>
-    <span style="color: #4ec9b0;">$</span> <span style="color: #569cd6;">git diff</span> <span style="color: #d4d4d4;">|</span> <span style="color: #ce9178;">npx gitink --dry-run</span>
-  </div>
-  <!-- Standard outputs -->
-  <div style="color: #b5cea8; margin-top: 4px;">Read git diff from stdin.</div>
-  <div style="color: #b5cea8;">Analyzing diff and generating content...</div>
-  <br>
-  <!-- Generated output headers -->
-  <div style="color: #4fc1ff; font-weight: bold;">Generated PR Title:</div>
-  <div style="color: #dcdcaa; padding-left: 10px;">feat: add local storage caching for session validation</div>
-  <br>
-  <div style="color: #4fc1ff; font-weight: bold;">Generated PR Description:</div>
-  <div style="border-left: 3px solid #007acc; padding-left: 12px; margin-left: 10px; color: #c8c8c8;">
-    <strong style="color: #ffffff;">## Summary</strong><br>
-    This pull request introduces local storage caching for user sessions to reduce redundant verification requests.<br>
-    <br>
-    <strong style="color: #ffffff;">## Key Changes</strong><br>
-    - Modified <code>src/auth.ts</code> to check cache before calling verify endpoint.<br>
-    - Added session expiration validation helper in <code>src/utils.ts</code>.
-  </div>
-</div>
+![Terminal - gitink](assets/terminal-mockup.svg)
 
 ---
 
