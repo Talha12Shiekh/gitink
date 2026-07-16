@@ -7,7 +7,7 @@
 
 Automatically generate pull request titles and descriptions using AI.
 
-![Terminal - gitink](assets/terminal-mockup.svg)
+![Terminal - gitink](https://raw.githubusercontent.com/Talha12Shiekh/gitink/main/assets/terminal-mockup.svg)
 
 ---
 
