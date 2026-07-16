@@ -1,9 +1,9 @@
 # GitInk
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/Talha12Shiekh/PRSmith/gitlink.yml)](https://github.com/Talha12Shiekh/PRSmith/actions)
-[![Coverage Status](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Talha12Shiekh/PRSmith)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Talha12Shiekh/gitink/gitlink.yml)](https://github.com/Talha12Shiekh/gitink/actions)
+[![Coverage Status](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/Talha12Shiekh/gitink)
 [![npm version](https://img.shields.io/npm/v/gitink)](https://www.npmjs.com/package/gitink)
-[![License](https://img.shields.io/npm/l/gitink)](https://github.com/Talha12Shiekh/PRSmith/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/gitink)](https://github.com/Talha12Shiekh/gitink/blob/main/LICENSE)
 
 Automatically generate pull request titles and descriptions using AI.
 
@@ -210,7 +210,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run GitInk Generator
-        uses: Talha12Shiekh/PRSmith@main
+        uses: Talha12Shiekh/gitink@main
         with:
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -259,8 +259,8 @@ We welcome community contributions. To set up the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Talha12Shiekh/PRSmith.git
-   cd PRSmith
+   git clone https://github.com/Talha12Shiekh/gitink.git
+   cd gitink
    ```
 2. Install development dependencies:
    ```bash
