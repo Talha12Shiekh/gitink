@@ -220,7 +220,7 @@ To run GitInk in your repository's actions, you need to configure access credent
 
 ## Configuration
 
-You can customize GitInk's files validation and prompt settings by creating a `.prsmith.json` file in the root of your project:
+You can customize GitInk's files validation and prompt settings by creating a `.gitink.json` file in the root of your project:
 
 ```json
 {

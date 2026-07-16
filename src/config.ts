@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 // Load local .env file if it exists
 dotenv.config();
 
-export interface PRSmithConfig {
+export interface GitInkConfig {
   geminiApiKey?: string;
   githubToken?: string;
   repository?: string; // Format: "owner/repo"
@@ -59,8 +59,8 @@ You MUST respond with a raw JSON object matching the following structure:
 
 Do not wrap the JSON output in markdown blocks (like \`\`\`json ... \`\`\`). The response must be a single, valid JSON object containing exactly the "title" and "description" keys.`;
 
-export function loadConfig(configPath?: string): PRSmithConfig {
-  const defaults: PRSmithConfig = {
+export function loadConfig(configPath?: string): GitInkConfig {
+  const defaults: GitInkConfig = {
     geminiApiKey: process.env.GEMINI_API_KEY,
     githubToken: process.env.GITHUB_TOKEN,
     repository: process.env.GITHUB_REPOSITORY,
@@ -85,8 +85,8 @@ export function loadConfig(configPath?: string): PRSmithConfig {
     }
   }
 
-  // Resolve config file path (default to .prsmith.json in current directory if not specified)
-  const resolvedConfigPath = configPath || path.join(process.cwd(), '.prsmith.json');
+  // Resolve config file path (default to .gitink.json in current directory if not specified)
+  const resolvedConfigPath = configPath || path.join(process.cwd(), '.gitink.json');
 
   if (fs.existsSync(resolvedConfigPath)) {
     try {

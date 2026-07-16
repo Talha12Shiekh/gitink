@@ -53,7 +53,7 @@ export async function runAction() {
     core.info('Updating Pull Request with generated title and description...');
     await updatePullRequest(config.githubToken, config.repository, config.prNumber, result.title, result.description);
 
-    core.info('PR successfully updated by PRSmith! 🚀');
+    core.info('PR successfully updated by GitInk! 🚀');
   } catch (err: any) {
     core.setFailed(`Action execution failed: ${err.message}`);
   }

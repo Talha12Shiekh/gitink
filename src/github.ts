@@ -83,7 +83,7 @@ export function filterAndTruncateDiff(diffText: string, excludePatterns: string[
 
   let finalDiff = includedChunks.join('');
   if (omittedFiles.length > 0) {
-    finalDiff += `\n\n... [Diff truncated by PRSmith due to size limits. The following files were omitted from the diff analysis: ${omittedFiles.join(', ')}]`;
+    finalDiff += `\n\n... [Diff truncated by GitInk due to size limits. The following files were omitted from the diff analysis: ${omittedFiles.join(', ')}]`;
   }
   return finalDiff;
 }
