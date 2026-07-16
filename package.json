@@ -1,11 +1,14 @@
 {
   "name": "gitink",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Auto-generate GitHub PR titles and descriptions using Gemini AI",
   "main": "dist/index.js",
   "bin": {
     "gitink": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc && ncc build dist/action.js -o dist/action-bundle",
     "start": "ts-node src/index.ts",
