@@ -1,6 +1,6 @@
 {
   "name": "gitink",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Auto-generate GitHub PR titles and descriptions using Gemini AI",
   "main": "dist/index.js",
   "bin": {
