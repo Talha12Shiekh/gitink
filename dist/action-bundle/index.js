@@ -88,7 +88,7 @@ async function runAction() {
         core.info(`Generated PR Title: ${result.title}`);
         core.info('Updating Pull Request with generated title and description...');
         await (0, github_js_1.updatePullRequest)(config.githubToken, config.repository, config.prNumber, result.title, result.description);
-        core.info('PR successfully updated by PRSmith! 🚀');
+        core.info('PR successfully updated by GitInk! 🚀');
     }
     catch (err) {
         core.setFailed(`Action execution failed: ${err.message}`);
@@ -213,8 +213,8 @@ function loadConfig(configPath) {
             console.warn('Failed to parse GitHub Action event payload:', err);
         }
     }
-    // Resolve config file path (default to .prsmith.json in current directory if not specified)
-    const resolvedConfigPath = configPath || path.join(process.cwd(), '.prsmith.json');
+    // Resolve config file path (default to .gitink.json in current directory if not specified)
+    const resolvedConfigPath = configPath || path.join(process.cwd(), '.gitink.json');
     if (fs.existsSync(resolvedConfigPath)) {
         try {
             const fileContent = fs.readFileSync(resolvedConfigPath, 'utf8');
@@ -390,7 +390,7 @@ function filterAndTruncateDiff(diffText, excludePatterns, maxLength) {
     }
     let finalDiff = includedChunks.join('');
     if (omittedFiles.length > 0) {
-        finalDiff += `\n\n... [Diff truncated by PRSmith due to size limits. The following files were omitted from the diff analysis: ${omittedFiles.join(', ')}]`;
+        finalDiff += `\n\n... [Diff truncated by GitInk due to size limits. The following files were omitted from the diff analysis: ${omittedFiles.join(', ')}]`;
     }
     return finalDiff;
 }
