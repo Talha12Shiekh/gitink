@@ -14,6 +14,7 @@ Automatically generate pull request titles and descriptions using AI.
 ## Table of Contents
 
 - [Features](#features)
+- [AI Assistance & Development (Codex & GPT-5.6)](#ai-assistance--development-codex--gpt-56)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
   - [CLI Mode](#cli-mode)
@@ -31,6 +32,15 @@ Automatically generate pull request titles and descriptions using AI.
 - **Smart Truncation**: Handles large pull requests safely by truncating excessive diff chunks and listing omitted files in the final analysis.
 - **Configurable Prompting**: Allows you to customize the AI's generation instructions and output formatting via a simple configuration file.
 - **Structured Output**: Enforces valid JSON schema responses from the API to guarantee error-free formatting.
+
+---
+
+## AI Assistance & Development (Codex & GPT-5.6)
+
+GitInk was developed with the assistance of **OpenAI Codex** and **GPT-5.6** models as AI pair-programming assistants throughout the software creation process:
+
+- **OpenAI Codex**: Used for code generation, writing TypeScript source modules (`src/github.ts`, `src/config.ts`), generating AST-level git diff parsing logic, and handling regex pattern matching for file exclusions.
+- **GPT-5.6**: Used for high-level software architecture design, crafting JSON schema validation constraints for Gemini responses, designing the custom terminal SVG mockup, and pair-programming the Next.js landing page UI.
 
 ---
 
